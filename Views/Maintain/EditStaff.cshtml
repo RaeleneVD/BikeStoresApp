@@ -1,0 +1,91 @@
+﻿@model BikeStoresApp.Models.staff
+
+@using (Html.BeginForm("EditStaff", "Maintain", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.staff_id)
+
+    <div class="form-horizontal">
+        <!-- First Name -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", type = "email", required = "required" } })
+            </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <!-- Active Status -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.active, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <select name="active" class="form-control" required>
+                    <option value="1" @(Model.active == 1 ? "selected" : "")>Active</option>
+                    <option value="0" @(Model.active == 0 ? "selected" : "")>Inactive</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Store Dropdown -->
+        <div class="form-group">
+            @Html.Label("Store", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <select name="store_id" class="form-control" required>
+                    @foreach (var store in ViewBag.Stores as List<BikeStoresApp.Models.store>)
+                    {
+                        <option value="@store.store_id" @(Model.store_id == store.store_id ? "selected" : "")>@store.store_name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Manager Dropdown (Optional) -->
+        <div class="form-group">
+            @Html.Label("Manager", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <select name="manager_id" class="form-control">
+                    <option value="">-- No Manager --</option>
+                    @foreach (var manager in ViewBag.Managers as List<BikeStoresApp.Models.staff>)
+                    {
+                        <option value="@manager.staff_id" @(Model.manager_id == manager.staff_id ? "selected" : "")>@manager.first_name @manager.last_name</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> Update Staff
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+}

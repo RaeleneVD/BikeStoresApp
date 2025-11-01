@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using BikeStoresApp.Models;
 
+
 namespace BikeStoresApp.Controllers
 {
     public class HomeController : Controller
@@ -94,5 +95,7 @@ namespace BikeStoresApp.Controllers
             if (disposing) db.Dispose();
             base.Dispose(disposing);
         }
+
+
     }
 }

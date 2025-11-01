@@ -12,66 +12,63 @@ namespace BikeStoresApp.Controllers
     {
         private BikeStoresEntities db = new BikeStoresEntities();
 
-        // GET: Maintain
+        // GET: Maintain - Main page
         public async Task<ActionResult> Maintain(
-            int staffIndex = 0,
-            int customerIndex = 0,
-            int productIndex = 0,
-            int? brandId = null,
-            int? categoryId = null)
+            int? staffIndex,
+            int? customerIndex,
+            int? productIndex,
+            int? brandId,
+            int? categoryId)
         {
-            // Load Staffs
-            ViewBag.Staffs = await db.staffs.Include(s => s.store).ToListAsync();
-            ViewBag.StaffIndex = staffIndex;
-
-            // Load Customers
-            ViewBag.Customers = await db.customers.ToListAsync();
-            ViewBag.CustomerIndex = customerIndex;
-
-            // Load Products with optional filters
-            var productsQuery = db.products.Include(p => p.brand).Include(p => p.category).AsQueryable();
-
-            if (brandId.HasValue)
-            {
-                productsQuery = productsQuery.Where(p => p.brand_id == brandId.Value);
-            }
-
-            if (categoryId.HasValue)
-            {
-                productsQuery = productsQuery.Where(p => p.category_id == categoryId.Value);
-            }
-
-            ViewBag.Products = await productsQuery.ToListAsync();
-            ViewBag.ProductIndex = productIndex;
-
-            // Load dropdowns for products
+            // Load brands and categories for filtering
             ViewBag.Brands = await db.brands.ToListAsync();
             ViewBag.Categories = await db.categories.ToListAsync();
+
+            // Load stores and managers for staff editing
+            ViewBag.Stores = await db.stores.ToListAsync();
+            ViewBag.Managers = await db.staffs.ToListAsync();
+
+            // Load all staff and customers
+            var staffs = await db.staffs.Include(s => s.store).ToListAsync();
+            var customers = await db.customers.ToListAsync();
+
+            // Load products with optional filtering
+            var productsQuery = db.products.Include(p => p.brand).Include(p => p.category).AsQueryable();
+            if (brandId.HasValue)
+                productsQuery = productsQuery.Where(p => p.brand_id == brandId.Value);
+            if (categoryId.HasValue)
+                productsQuery = productsQuery.Where(p => p.category_id == categoryId.Value);
+
+            var products = await productsQuery.ToListAsync();
+
+            // Initialize indexes safely
+            ViewBag.StaffIndex = staffIndex.HasValue && staffIndex.Value >= 0 && staffIndex.Value < staffs.Count ? staffIndex.Value : 0;
+            ViewBag.CustomerIndex = customerIndex.HasValue && customerIndex.Value >= 0 && customerIndex.Value < customers.Count ? customerIndex.Value : 0;
+            ViewBag.ProductIndex = productIndex.HasValue && productIndex.Value >= 0 && productIndex.Value < products.Count ? productIndex.Value : 0;
+
+            // Put data in ViewBag
+            ViewBag.Staffs = staffs;
+            ViewBag.Customers = customers;
+            ViewBag.Products = products;
 
             return View();
         }
 
         #region Staff Actions
-        public async Task<ActionResult> EditStaff(int id)
-        {
-            var staff = await db.staffs.FindAsync(id);
-            if (staff == null) return HttpNotFound();
-            return View(staff);
-        }
-
+        // POST: Update staff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpdateStaff(staff updatedStaff)
+        public async Task<ActionResult> EditStaff(staff updatedStaff)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(updatedStaff).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(updatedStaff).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Maintain");
             }
-            return View("EditStaff", updatedStaff);
+            return RedirectToAction("Maintain");
         }
 
+        // GET: Delete staff
         public async Task<ActionResult> DeleteStaff(int id)
         {
             var staff = await db.staffs.FindAsync(id);
@@ -85,26 +82,20 @@ namespace BikeStoresApp.Controllers
         #endregion
 
         #region Customer Actions
-        public async Task<ActionResult> EditCustomer(int id)
-        {
-            var customer = await db.customers.FindAsync(id);
-            if (customer == null) return HttpNotFound();
-            return View(customer);
-        }
-
+        // POST: Update customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpdateCustomer(customer updatedCustomer)
+        public async Task<ActionResult> EditCustomer(customer updatedCustomer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(updatedCustomer).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(updatedCustomer).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Maintain");
             }
-            return View("EditCustomer", updatedCustomer);
+            return RedirectToAction("Maintain");
         }
 
+        // GET: Delete customer
         public async Task<ActionResult> DeleteCustomer(int id)
         {
             var customer = await db.customers.FindAsync(id);
@@ -118,30 +109,20 @@ namespace BikeStoresApp.Controllers
         #endregion
 
         #region Product Actions
-        public async Task<ActionResult> EditProduct(int id)
-        {
-            var product = await db.products.FindAsync(id);
-            if (product == null) return HttpNotFound();
-            ViewBag.Brands = await db.brands.ToListAsync();
-            ViewBag.Categories = await db.categories.ToListAsync();
-            return View(product);
-        }
-
+        // POST: Update product
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpdateProduct(product updatedProduct)
+        public async Task<ActionResult> EditProduct(product updatedProduct)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(updatedProduct).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(updatedProduct).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Maintain");
             }
-            ViewBag.Brands = await db.brands.ToListAsync();
-            ViewBag.Categories = await db.categories.ToListAsync();
-            return View("EditProduct", updatedProduct);
+            return RedirectToAction("Maintain");
         }
 
+        // GET: Delete product
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var product = await db.products.FindAsync(id);

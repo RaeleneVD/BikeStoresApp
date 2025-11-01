@@ -2,17 +2,19 @@
     ViewBag.Title = "Home - Bike Stores";
 }
 
-<div class="container mt-4">
-    <div class="row">
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
 
         <!-- STAFF CARD -->
         <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
                     <span>Staff</span>
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#createStaffModal">Add</button>
+                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#createStaffModal">
+                        <span class="glyphicon glyphicon-plus"></span> Add
+                    </button>
                 </div>
-                <div class="card-body">
+                <div class="panel-body">
                     @{
                         var staffs = ViewBag.Staffs as List<BikeStoresApp.Models.staff>;
                         var staffIndex = ViewBag.StaffIndex ?? 0;
@@ -28,38 +30,60 @@
                     {
                         <p><strong>ID:</strong> @staff.staff_id</p>
                         <p><strong>Name:</strong> @staff.first_name @staff.last_name</p>
-                        <p><strong>Sold Items:</strong></p>
-                        <ul>
-                            <li>Sold Item One</li>
-                            <li>Sold Item Two</li>
-                        </ul>
+                        <p><strong>Email:</strong> @staff.email</p>
+                        <p><strong>Phone:</strong> @staff.phone</p>
+                        <p><strong>Store:</strong> @staff.store.store_name</p>
+                        <p><strong>Active:</strong> @(staff.active == 1 ? "Yes" : "No")</p>
                     }
                     else
                     {
-                        <p>No staff available.</p>
+                        <p class="text-muted">No staff available.</p>
                     }
                 </div>
-                <div class="card-footer d-flex justify-content-between">
-                    @if (staffs != null && staffIndex > 0)
-                    {
-                        <a href="@Url.Action("Index", new { staffIndex = staffIndex - 1, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-sm btn-primary">Prev</a>
-                    }
-                    @if (staffs != null && staffIndex < staffs.Count - 1)
-                    {
-                        <a href="@Url.Action("Index", new { staffIndex = staffIndex + 1, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-sm btn-primary ms-auto">Next</a>
-                    }
+                <div class="panel-footer">
+                    <div class="btn-group btn-group-justified" role="group">
+                        @if (staffs != null && staffIndex > 0)
+                        {
+                            <a href="@Url.Action("Index", new { staffIndex = staffIndex - 1, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                            </a>
+                        }
+
+                        <a class="btn btn-default disabled">@(staffIndex + 1) / @(staffs?.Count ?? 0)</a>
+
+                        @if (staffs != null && staffIndex < staffs.Count - 1)
+                        {
+                            <a href="@Url.Action("Index", new { staffIndex = staffIndex + 1, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-default">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default disabled">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- CUSTOMER CARD -->
         <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
                     <span>Customer</span>
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#createCustomerModal">Add</button>
+                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#createCustomerModal">
+                        <span class="glyphicon glyphicon-plus"></span> Add
+                    </button>
                 </div>
-                <div class="card-body">
+                <div class="panel-body">
                     @{
                         var customers = ViewBag.Customers as List<BikeStoresApp.Models.customer>;
                         var customerIndex = ViewBag.CustomerIndex ?? 0;
@@ -75,57 +99,81 @@
                     {
                         <p><strong>ID:</strong> @customer.customer_id</p>
                         <p><strong>Name:</strong> @customer.first_name @customer.last_name</p>
-                        <p><strong>Purchased Items:</strong></p>
-                        <ul>
-                            <li>Purchased Item One</li>
-                            <li>Purchased Item Two</li>
-                        </ul>
+                        <p><strong>Email:</strong> @customer.email</p>
+                        <p><strong>Phone:</strong> @customer.phone</p>
+                        <p><strong>City:</strong> @customer.city</p>
+                        <p><strong>State:</strong> @customer.state</p>
                     }
                     else
                     {
-                        <p>No customers available.</p>
+                        <p class="text-muted">No customers available.</p>
                     }
                 </div>
-                <div class="card-footer d-flex justify-content-between">
-                    @if (customers != null && customerIndex > 0)
-                    {
-                        <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = customerIndex - 1, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-sm btn-primary">Prev</a>
-                    }
-                    @if (customers != null && customerIndex < customers.Count - 1)
-                    {
-                        <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = customerIndex + 1, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-sm btn-primary ms-auto">Next</a>
-                    }
+                <div class="panel-footer">
+                    <div class="btn-group btn-group-justified" role="group">
+                        @if (customers != null && customerIndex > 0)
+                        {
+                            <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = customerIndex - 1, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                            </a>
+                        }
+
+                        <a class="btn btn-default disabled">@(customerIndex + 1) / @(customers?.Count ?? 0)</a>
+
+                        @if (customers != null && customerIndex < customers.Count - 1)
+                        {
+                            <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = customerIndex + 1, productIndex = ViewBag.ProductIndex ?? 0 })" class="btn btn-default">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default disabled">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- PRODUCT CARD -->
         <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <form method="get" class="d-flex align-items-center">
-                        <label class="me-2">Brand:</label>
-                        <select name="brandId" class="form-select me-2">
-                            <option value="">All Brands</option>
-                            @foreach (var brand in ViewBag.Brands ?? new List<BikeStoresApp.Models.brand>())
-                            {
-                                <option value="@brand.brand_id">@brand.brand_name</option>
-                            }
-                        </select>
-
-                        <label class="me-2">Category:</label>
-                        <select name="categoryId" class="form-select me-2">
-                            <option value="">All Categories</option>
-                            @foreach (var category in ViewBag.Categories ?? new List<BikeStoresApp.Models.category>())
-                            {
-                                <option value="@category.category_id">@category.category_name</option>
-                            }
-                        </select>
-
-                        <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <form method="get" class="form-inline">
+                        <div class="form-group">
+                            <label>Brand:</label>
+                            <select name="brandId" class="form-control input-sm" style="width: auto;">
+                                <option value="">All</option>
+                                @foreach (var brand in ViewBag.Brands ?? new List<BikeStoresApp.Models.brand>())
+                                {
+                                    <option value="@brand.brand_id">@brand.brand_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Category:</label>
+                            <select name="categoryId" class="form-control input-sm" style="width: auto;">
+                                <option value="">All</option>
+                                @foreach (var category in ViewBag.Categories ?? new List<BikeStoresApp.Models.category>())
+                                {
+                                    <option value="@category.category_id">@category.category_name</option>
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-xs">
+                            <span class="glyphicon glyphicon-filter"></span> Filter
+                        </button>
                     </form>
                 </div>
-                <div class="card-body">
+                <div class="panel-body">
                     @{
                         var products = ViewBag.Products as List<BikeStoresApp.Models.product>;
                         var productIndex = ViewBag.ProductIndex ?? 0;
@@ -143,22 +191,44 @@
                         <p><strong>Name:</strong> @product.product_name</p>
                         <p><strong>Brand:</strong> @product.brand.brand_name</p>
                         <p><strong>Category:</strong> @product.category.category_name</p>
+                        <p><strong>Year:</strong> @product.model_year</p>
                         <p><strong>Price:</strong> $@product.list_price</p>
                     }
                     else
                     {
-                        <p>No products found.</p>
+                        <p class="text-muted">No products found.</p>
                     }
                 </div>
-                <div class="card-footer d-flex justify-content-between">
-                    @if (products != null && productIndex > 0)
-                    {
-                        <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = productIndex - 1 })" class="btn btn-sm btn-primary">Prev</a>
-                    }
-                    @if (products != null && productIndex < products.Count - 1)
-                    {
-                        <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = productIndex + 1 })" class="btn btn-sm btn-primary ms-auto">Next</a>
-                    }
+                <div class="panel-footer">
+                    <div class="btn-group btn-group-justified" role="group">
+                        @if (products != null && productIndex > 0)
+                        {
+                            <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = productIndex - 1, brandId = Request.QueryString["brandId"], categoryId = Request.QueryString["categoryId"] })" class="btn btn-default">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                            </a>
+                        }
+
+                        <a class="btn btn-default disabled">@(productIndex + 1) / @(products?.Count ?? 0)</a>
+
+                        @if (products != null && productIndex < products.Count - 1)
+                        {
+                            <a href="@Url.Action("Index", new { staffIndex = ViewBag.StaffIndex ?? 0, customerIndex = ViewBag.CustomerIndex ?? 0, productIndex = productIndex + 1, brandId = Request.QueryString["brandId"], categoryId = Request.QueryString["categoryId"] })" class="btn btn-default">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default disabled">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -171,14 +241,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Create New Staff Member</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                @Html.Partial("CreateStaff", new BikeStoresApp.Models.staff(), new ViewDataDictionary {
-                    { "Stores", ViewBag.Stores ?? new List<BikeStoresApp.Models.store>() },
-                    { "Managers", ViewBag.Managers ?? new List<BikeStoresApp.Models.staff>() }
-                })
+                @Html.Partial("CreateStaff", new BikeStoresApp.Models.staff())
             </div>
         </div>
     </div>
@@ -189,8 +256,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Create New Customer</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 @Html.Partial("CreateCustomer", new BikeStoresApp.Models.customer())

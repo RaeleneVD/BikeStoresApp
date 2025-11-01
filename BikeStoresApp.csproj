@@ -240,6 +240,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CreateStaff.cshtml" />
     <Content Include="Views\Home\CreateCustomer.cshtml" />
+    <Content Include="Views\Maintain\EditStaff.cshtml" />
+    <Content Include="Views\Maintain\EditCustomer.cshtml" />
+    <Content Include="Views\Maintain\EditProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

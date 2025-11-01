@@ -1,0 +1,85 @@
+﻿@model BikeStoresApp.Models.customer
+
+@using (Html.BeginForm("EditCustomer", "Maintain", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.customer_id)
+
+    <div class="form-horizontal">
+        <!-- First Name -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", type = "email" } })
+            </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <!-- Street -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.street, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <!-- State -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <!-- Zip Code -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.zip_code, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.zip_code, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> Update Customer
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+}
