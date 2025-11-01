@@ -1,45 +1,64 @@
 ﻿@model BikeStoresApp.Models.customer
 
-<div class="p-3">
-    @using (Html.BeginForm("CreateCustomer", "Home", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm("CreateCustomer", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-        <div class="mb-3">
-            @Html.LabelFor(m => m.first_name, new { @class = "form-label" })
-            @Html.EditorFor(m => m.first_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+    <div class="form-horizontal">
+        <!-- First Name -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.first_name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.first_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
         </div>
 
-        <div class="mb-3">
-            @Html.LabelFor(m => m.last_name, new { @class = "form-label" })
-            @Html.EditorFor(m => m.last_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+        <!-- Last Name -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.last_name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.last_name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
         </div>
 
-        <div class="mb-3">
-            @Html.LabelFor(m => m.email, new { @class = "form-label" })
-            @Html.EditorFor(m => m.email, new { htmlAttributes = new { @class = "form-control", type = "email", required = "required" } })
+        <!-- Email -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.email, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.email, new { htmlAttributes = new { @class = "form-control", type = "email", required = "required" } })
+            </div>
         </div>
 
-        <div class="mb-3">
-            @Html.LabelFor(m => m.phone, new { @class = "form-label" })
-            @Html.EditorFor(m => m.phone, new { htmlAttributes = new { @class = "form-control" } })
+        <!-- Phone -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.phone, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.phone, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
 
-        <div class="mb-3">
-            @Html.LabelFor(m => m.city, new { @class = "form-label" })
-            @Html.EditorFor(m => m.city, new { htmlAttributes = new { @class = "form-control" } })
+        <!-- City -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.city, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.city, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
 
-        <div class="mb-3">
-            @Html.LabelFor(m => m.state, new { @class = "form-label" })
-            @Html.EditorFor(m => m.state, new { htmlAttributes = new { @class = "form-control" } })
+        <!-- State -->
+        <div class="form-group">
+            @Html.LabelFor(m => m.state, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(m => m.state, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
 
-        <div class="text-end">
-            <button type="submit" class="btn btn-success">Create</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <!-- Submit Buttons -->
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-success">Create Customer</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
         </div>
-    }
     </div>
-    
-   
+}
