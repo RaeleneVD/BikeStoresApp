@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using BikeStoresApp.Models;
 
-
 namespace BikeStoresApp.Controllers
 {
     public class HomeController : Controller
@@ -49,15 +48,6 @@ namespace BikeStoresApp.Controllers
             return View();
         }
 
-
-        // GET: CreateStaff
-        public async Task<ActionResult> CreateStaff()
-        {
-            ViewBag.Stores = await db.stores.ToListAsync();
-            ViewBag.Managers = await db.staffs.ToListAsync();
-            return PartialView("CreateStaff");
-        }
-
         // POST: CreateStaff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -69,12 +59,6 @@ namespace BikeStoresApp.Controllers
                 await db.SaveChangesAsync();
             }
             return RedirectToAction("Index");
-        }
-
-        // GET: CreateCustomer
-        public ActionResult CreateCustomer()
-        {
-            return PartialView("CreateCustomer");
         }
 
         // POST: CreateCustomer
@@ -95,7 +79,5 @@ namespace BikeStoresApp.Controllers
             if (disposing) db.Dispose();
             base.Dispose(disposing);
         }
-
-
     }
 }

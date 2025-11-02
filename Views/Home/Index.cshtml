@@ -245,12 +245,105 @@
                 <h4 class="modal-title">Create New Staff Member</h4>
             </div>
             <div class="modal-body">
-                @Html.Partial("CreateStaff", new BikeStoresApp.Models.staff())
+                @using (Html.BeginForm("CreateStaff", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">First Name</label>
+                            <div class="col-md-9">
+                                <input type="text" name="first_name" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Last Name</label>
+                            <div class="col-md-9">
+                                <input type="text" name="last_name" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Phone</label>
+                            <div class="col-md-9">
+                                <input type="text" name="phone" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Active Status -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Active</label>
+                            <div class="col-md-9">
+                                <select name="active" class="form-control" required>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Store Dropdown -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Store</label>
+                            <div class="col-md-9">
+                                <select name="store_id" class="form-control" required>
+                                    <option value="">-- Select Store --</option>
+                                    @if (ViewBag.Stores != null)
+                                    {
+                                        foreach (var store in ViewBag.Stores)
+                                        {
+                                            <option value="@store.store_id">@store.store_name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Manager Dropdown (Optional) -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Manager</label>
+                            <div class="col-md-9">
+                                <select name="manager_id" class="form-control">
+                                    <option value="">-- No Manager --</option>
+                                    @if (ViewBag.Managers != null)
+                                    {
+                                        foreach (var manager in ViewBag.Managers)
+                                        {
+                                            <option value="@manager.staff_id">@manager.first_name @manager.last_name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-ok"></span> Create Staff
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
-
 <!-- CREATE CUSTOMER MODAL -->
 <div class="modal fade" id="createCustomerModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -260,8 +353,90 @@
                 <h4 class="modal-title">Create New Customer</h4>
             </div>
             <div class="modal-body">
-                @Html.Partial("CreateCustomer", new BikeStoresApp.Models.customer())
+                @using (Html.BeginForm("CreateCustomer", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">First Name</label>
+                            <div class="col-md-9">
+                                <input type="text" name="first_name" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Last Name</label>
+                            <div class="col-md-9">
+                                <input type="text" name="last_name" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Phone</label>
+                            <div class="col-md-9">
+                                <input type="text" name="phone" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Street -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Street</label>
+                            <div class="col-md-9">
+                                <input type="text" name="street" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">City</label>
+                            <div class="col-md-9">
+                                <input type="text" name="city" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- State -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">State</label>
+                            <div class="col-md-9">
+                                <input type="text" name="state" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Zip Code -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Zip Code</label>
+                            <div class="col-md-9">
+                                <input type="text" name="zip_code" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-ok"></span> Create Customer
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
+
