@@ -1,0 +1,16 @@
+BIKE STORES - POPULAR PRODUCTS REPORT
+Generated: 2025-11-03 11:43:00
+================================================================================
+
+Product                        Brand           Category            Orders      Revenue
+--------------------------------------------------------------------------------
+Surly Ice Cream Truck Frame... Surly           Mountain Bikes         167 $  78,488.33
+Electra Cruiser 1 (24-Inch)... Electra         Cruisers Bicycles        157 $  42,388.43
+Electra Townie Original 7D ... Electra         Cruisers Bicycles        156 $  93,598.44
+Trek Slash 8 27.5 - 2016       Trek            Mountain Bikes         154 $ 615,998.46
+Electra Girl's Hawaii 1 (20... Electra         Children Bicycles        154 $  46,198.46
+Electra Townie Original 21D... Electra         Cruisers Bicycles        153 $  84,148.47
+Surly Straggler 650b - 2016    Surly           Cyclocross Bicycles        151 $ 253,829.49
+Electra Townie Original 7D ... Electra         Comfort Bicycles        148 $  73,998.52
+Surly Straggler - 2016         Surly           Cyclocross Bicycles        147 $ 227,703.00
+Trek Conduit+ - 2016           Trek            Electric Bikes         145 $ 434,998.55
