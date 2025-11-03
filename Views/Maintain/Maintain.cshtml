@@ -44,11 +44,12 @@
                     @if (staff != null)
                     {
                         <p><strong>ID:</strong> @staff.staff_id</p>
-                        <p><strong>Name:</strong> @staff.first_name @staff.last_name</p>
+                        <p><strong>First Name:</strong> @staff.first_name</p>
+                        <p><strong>Last Name:</strong> @staff.last_name</p>
                         <p><strong>Email:</strong> @staff.email</p>
                         <p><strong>Phone:</strong> @staff.phone</p>
                         <p><strong>Store:</strong> @staff.store.store_name</p>
-                        <p><strong>Active:</strong> @(staff.active == 1 ? "Yes" : "No")</p>
+
                     }
                     else
                     {
@@ -110,11 +111,11 @@
                     @if (customer != null)
                     {
                         <p><strong>ID:</strong> @customer.customer_id</p>
-                        <p><strong>Name:</strong> @customer.first_name @customer.last_name</p>
+                        <p><strong>First Name:</strong> @customer.first_name</p>
+                        <p><strong>Last Name:</strong> @customer.last_name</p>
                         <p><strong>Email:</strong> @customer.email</p>
                         <p><strong>Phone:</strong> @customer.phone</p>
                         <p><strong>City:</strong> @customer.city</p>
-                        <p><strong>State:</strong> @customer.state</p>
                     }
                     else
                     {
@@ -197,8 +198,22 @@
                     </form>
                 </div>
                 <div class="panel-body">
+
+
+
                     @if (product != null)
                     {
+                        @* Display bike image *@
+
+                        var random = new Random();
+                        var randomIndex = random.Next(1, 19); // Assuming 20 images named Bike1 to Bike20
+                        var imagePath = Url.Content($"~/Images/Bike{randomIndex}.jpeg");
+
+                        <img src="@imagePath" alt="@product.brand.brand_name"
+                             class="img-thumbnail"
+                             style="width:200px;height:auto;"
+                             onerror="this.src='@Url.Content("~/Images/placeholder.jpeg")'; this.onerror=null;" />
+
                         <p><strong>ID:</strong> @product.product_id</p>
                         <p><strong>Name:</strong> @product.product_name</p>
                         <p><strong>Brand:</strong> @product.brand.brand_name</p>

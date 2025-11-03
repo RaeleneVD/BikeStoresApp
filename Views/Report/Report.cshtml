@@ -30,48 +30,7 @@
                 </div>
                 <div class="panel-body">
                     <!-- Data Table -->
-                   < <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product Name</th>
-                                    <th>Brand</th>
-                                    <th>Category</th>
-                                    <th>Total Orders</th>
-                                    <th>Total Revenue</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    var products = ViewBag.PopularProducts as IEnumerable<dynamic>;
-                                    int rank = 1;
-                                }
-                                @if (products != null && products.Any())
-                                {
-                                    foreach (var product in (IEnumerable<dynamic>)ViewBag.PopularProducts)
-                                    {
-                                        <tr>
-                                            <td>@rank</td>
-                                            <td>@product.ProductName</td>
-                                            <td>@product.BrandName</td>
-                                            <td>@product.CategoryName</td>
-                                            <td>@product.TotalOrders</td>
-                                            <td>@product.TotalRevenue</td>
-                                        </tr>
-                                        rank++;
-                                    }
-
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td colspan="6" class="text-center text-muted">No data available</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                   
 
                     <!-- Chart -->
                     <div style="margin-top: 30px;">
@@ -116,58 +75,9 @@
     </div>
 
     <!-- DOCUMENT ARCHIVE -->
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-md-12">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Document Archive</h3>
-                </div>
-                <div class="panel-body">
-                    @{
-                        var savedReports = ViewBag.SavedReports as IEnumerable<dynamic>;
-                    }
-
-                    @if (savedReports != null && savedReports.Any())
-                    {
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>File Name</th>
-                                        <th>Date Created</th>
-                                        <th>Size</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var report in savedReports)
-                                    {
-                                        <tr>
-                                            <td>@report.FileName</td>
-                                            <td>@report.DateCreated.ToString("yyyy-MM-dd HH:mm")</td>
-                                            <td>@((report.FileSize / 1024.0).ToString("N2")) KB</td>
-                                            <td>
-                                                <a href="@Url.Action("DownloadReport", new { fileName = report.FileName })" class="btn btn-primary btn-sm">
-                                                    <span class="glyphicon glyphicon-download-alt"></span> Download
-                                                </a>
-                                                <a href="@Url.Action("DeleteReport", new { fileName = report.FileName })" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this report?')">
-                                                    <span class="glyphicon glyphicon-trash"></span> Delete
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                    else
-                    {
-                        <p class="text-muted">No saved reports yet. Generate and save a report to see it here.</p>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
+   
+       
+        
 </div>
 
 @section Scripts {

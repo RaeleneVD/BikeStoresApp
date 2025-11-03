@@ -190,6 +190,25 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Bike1.jpeg" />
+    <Content Include="Images\placeholder.jpeg" />
+    <Content Include="Images\Bike2.jpeg" />
+    <Content Include="Images\Bike3.jpeg" />
+    <Content Include="Images\Bike4.jpeg" />
+    <Content Include="Images\Bike5.jpeg" />
+    <Content Include="Images\Bike6.jpeg" />
+    <Content Include="Images\Bike7.jpeg" />
+    <Content Include="Images\Bike8.jpeg" />
+    <Content Include="Images\Bike9.jpeg" />
+    <Content Include="Images\Bike10.jpeg" />
+    <Content Include="Images\Bike11.jpeg" />
+    <Content Include="Images\Bike12.jpeg" />
+    <Content Include="Images\Bike14.jpeg" />
+    <Content Include="Images\Bike13.jpeg" />
+    <Content Include="Images\Bike15.jpeg" />
+    <Content Include="Images\Bike16.jpeg" />
+    <Content Include="Images\Bike17.jpeg" />
+    <Content Include="Images\Bike18.jpeg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
