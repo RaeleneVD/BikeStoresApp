@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row" style="margin-top: 20px;">
 
-        <!-- STAFF CARD -->
+        <!--STAFF CARD -->
         <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
@@ -34,6 +34,7 @@
                         <p><strong>Email:</strong> @staff.email</p>
                         <p><strong>Phone:</strong> @staff.phone</p>
                         <p><strong>Store:</strong> @staff.store.store_name</p>
+
 
                     }
                     else
@@ -101,10 +102,12 @@
                         <p><strong>ID:</strong> @customer.customer_id</p>
                         <p><strong>First Name:</strong> @customer.first_name</p>
                         <p><strong>Last Name:</strong> @customer.last_name</p>
+
                         <p><strong>Email:</strong> @customer.email</p>
                         <p><strong>Phone:</strong> @customer.phone</p>
                         <p><strong>City:</strong> @customer.city</p>
                         
+
                     }
                     else
                     {
@@ -193,7 +196,7 @@
                             @* Display bike image *@
                             
                                 var random = new Random();
-                                var randomIndex = random.Next(1, 19); // Assuming 20 images named Bike1 to Bike20
+                                var randomIndex = random.Next(1, 19); 
                                 var imagePath = Url.Content($"~/Images/Bike{randomIndex}.jpeg");
                             
                             <img src="@imagePath" alt="@product.brand.brand_name"
@@ -202,21 +205,7 @@
                                  onerror="this.src='@Url.Content("~/Images/placeholder.jpeg")'; this.onerror=null;" />
 
 
-                           // var brandName = product.brand.brand_name.Replace(" ", "_");
-                            //var random = new Random();
-                           // var imageNumber = random.Next(1, 3); // If you have 1-2 images per brand
-                           // var imagePath = "~/Images/" + brandName + imageNumber + ".jpeg";
-                           // var imageUrl = Url.Content(imagePath);
-
-
-
-                            //<div class="text-center" style="margin-bottom: 15px;">
-                            //    <img src="@imageUrl"
-                            //         alt="@product.brand.brand_name @product.category.category_name"
-                            //         class="img-responsive"
-                             //        style="max-height: 200px; margin: 0 auto; border-radius: 5px;"
-                             //        onerror="this.src='@Url.Content("~/Images/placeholder.jpg")'; this.onerror=null;" />
-                           // </div>
+                     
 
                             <p><strong>ID:</strong> @product.product_id</p>
                             <p><strong>Name:</strong> @product.product_name</p>

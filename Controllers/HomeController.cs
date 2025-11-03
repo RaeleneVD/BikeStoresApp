@@ -18,7 +18,7 @@ namespace BikeStoresApp.Controllers
             ViewBag.Brands = await db.brands.ToListAsync();
             ViewBag.Categories = await db.categories.ToListAsync();
 
-            // Load stores and staff for CreateStaff modal
+            // Load stores and staff for CreateStaff modal popup
             ViewBag.Stores = await db.stores.ToListAsync();
             ViewBag.Managers = await db.staffs.ToListAsync();
 
@@ -35,7 +35,7 @@ namespace BikeStoresApp.Controllers
 
             var products = await productsQuery.ToListAsync();
 
-            // Initialize indexes safely
+            // Initialize indexes 
             ViewBag.StaffIndex = staffIndex.HasValue && staffIndex.Value >= 0 && staffIndex.Value < staffs.Count ? staffIndex.Value : 0;
             ViewBag.CustomerIndex = customerIndex.HasValue && customerIndex.Value >= 0 && customerIndex.Value < customers.Count ? customerIndex.Value : 0;
             ViewBag.ProductIndex = productIndex.HasValue && productIndex.Value >= 0 && productIndex.Value < products.Count ? productIndex.Value : 0;

@@ -1,5 +1,5 @@
 BIKE STORES - POPULAR PRODUCTS REPORT
-Generated: 2025-11-03 18:53:42
+Generated: 2025-11-03 19:11:59
 ================================================================================
 
 Product                        Brand           Category            Orders      Revenue

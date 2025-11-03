@@ -154,7 +154,7 @@ namespace BikeStoresApp.Controllers
             return RedirectToAction("Report");
         }
 
-        // GET: Download Report
+        // GET: Download Report  --not working
         public ActionResult DownloadReport(string fileName)
         {
             var filePath = Server.MapPath("~/Reports/" + fileName);
@@ -172,7 +172,7 @@ namespace BikeStoresApp.Controllers
             return File(fileBytes, contentType, fileName);
         }
 
-        // GET: Delete Report
+        // GET: Delete Report  --not working
         public ActionResult DeleteReport(string fileName)
         {
             var filePath = Server.MapPath("~/Reports/" + fileName);
